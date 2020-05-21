@@ -1,0 +1,112 @@
+-------------------------------------------------------------------------------
+
+USAGE: Place fileSearch.py in any directory, then use a command line interface 
+to traverse to that directory:
+
+i.e.
+If I placed fileSearch.py into 'Recursive_Folder_Search' my terminal looks like:
+C:\Users\vietw\Desktop\Python_Projects\Recursive_Folder_Search>_
+
+Run the file by calling: fileSearch.py <root_dir> <keyword> where
+    - root_dir: File path to the directory to recursively search in. 
+    - keyword: String to search for in root_dir and its subdirectories.
+   
+Outputs: 
+    - Data Structure Containing all directories and file counts:
+    - An output graph with a plot with X-axis as subdir name string, Y-axis as 
+    count values. 
+    
+    NOTE: output bar graph does not include directories with 0 
+    file counts to remove sparsity and improve clarity. Graph may
+    be difficult to read for sub-directories with long names
+
+Test fileSearch.py by running the unit test module by calling 
+fileSearch_Unit_Test.py, visit code for more details on tests.
+
+-------------------------------------------------------------------------------
+QUESTIONS AND CRITERIA
+         
+- Coding style - module name, class name, functions, clarity, data
+structure, algorithms etc.
+
+- Argument handling - Arguments are handled manually using the testInput
+function. Assignment criteria left this open to interpretation. getopt
+was not used since the format of the arguments would be 'root_dir keyword'
+and thus do now have any verbose options.
+
+- Portability - This program was tested on a PC Windows 10, the scripts do
+import the OS module, which from documentation is platform independent. 
+Further testing would have been done, but no machines running Linux or OS
+were available.  
+
+- Scalability - This code can be scalable by only using the recursiveSearch
+algorithm. You can import this algorithm into a threading/multiprocessing
+script to run on many different directories and keywords. If I were to 
+implement this script in this manner I would use the ThreadPoolExecutor 
+or ProcessPoolExecutor to run recursiveSearch on n threads/processes
+using a list as an argument for the root_dir and keywords. Although 
+initially this script seems to be I/O bounded rather than CPU bounded, 
+Decision on whether the process should be a threaded or multiprocessed 
+would come through experimentation. 
+
+- Reliability - program should not crash through proper argument handling.
+The program assumes directories and paths do not have spaces in their names.
+
+-------------------------------------------------------------------------------
+
+README - README text file documenting submission contents, file descriptions
+as well as answer some questions from the assignment critertia
+
+FileSearch.py - stand-alone script that recursively searches a 'root_dir' for 
+all files with the string 'keyword' in it using os.walk. Returns a dictionary
+data structure with directory names and file counts as well as a bar graph 
+created using the matplotlib module. Prints to stdout and FileSearch.log
+
+Argument Inputs: 
+    - root_dir: File path to the directory to recursively search in. 
+    - keyword: String to search for in root_dir and its subdirectories.   
+
+Outputs: 
+    - Data Structure Containing all directories and file counts:
+    - An output graph with a plot with X-axis as subdir name string, Y-axis as 
+    count values. 
+    
+    NOTE: output bar graph does not include directories with 0 
+    file counts to remove sparsity.
+
+-------------------------------------------------------------------------------
+
+fileSearch_Unit_Test.py - stand-alone script, tests functionality of the 
+testInput and recursiveSearch methods from fileSearch.py Features 2 tests:
+
+1) test_testInput_Invalid_Inputs
+2) test_recursiveSearch
+
+test_testInput_Invalid_Inputs: tests the following input cases
+
+Test Cases:
+1) test input <= 1
+2) test input >= 3
+3) test input with invalid directory
+
+test_recursiveSearch: generates a directory architecture and tests 1 -> testMax
+pseudorandom combinations of targetfiles and junkfiles. After testing, the 
+testing directories are cleaned up. 
+
+TESTING DIRECTORY ARCHITECTURE: a->b->c->d-> . . .  -> z
+
+Test Cases:
+1) root_dir has no files with 'keyword'
+2) 1 -> testMax combinations of files with targetfiles and junkfiles 
+-------------------------------------------------------------------------------
+
+FileSearch.log - output log file for FileSearch.py
+
+Output Format:
+
+pathDictionary - Dictionary Data Structure with 
+                 keys = subdir names, values = file counts with keyword
+Directory Names - Printed list of directories searched in
+FileCounts - Directory file counts 
+
+-------------------------------------------------------------------------------
